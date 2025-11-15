@@ -1,0 +1,4 @@
+La idea de  este proyecto es desarrollar el juego de pong con pygames 
+y otra regla más el código no puede pasar por IA.
+
+Algoritmo
