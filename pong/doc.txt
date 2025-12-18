@@ -2,3 +2,8 @@ La idea de  este proyecto es desarrollar el juego de pong con pygames
 y otra regla más el código no puede pasar por IA.
 
 Algoritmo
+ 
+
+
+para ejecutar el código tienes que correr este código desde la carpeta pong: 
+py -3.11 pong.py 
