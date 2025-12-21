@@ -1,5 +1,6 @@
 
 import pygame
+import random
 from sys import exit
 
 #Inicialmos pygame
@@ -38,11 +39,17 @@ runnig = True
 #paddles 
 player = pygame.Rect(ancho - 100, alto/2-50, 10, 100)
 opponet = pygame.Rect(100, alto/2- 50, 10, 100)
+
+#puntuacion
+player_score = 0 
+opponet_score = 0 
+
+
+# Pelota
+# Significa las dimensiones que tienen la pelota.  
+pelota = pygame.Rect(ancho/2 - 10, alto/2-10, 20, 20)
+x_speed, y_speed = 1, 1
                      
-
-
-
-
 
 #Ciclo principal del juego, en este ciclo se van a ejecutar todos los eventos del juego. 
 while True: 
@@ -73,15 +80,34 @@ while True:
             text = font.render(str(counter), True, (0, 128, 0))
         if counter == 0:
             pygame.time.set_timer(timer_event, 0)
+    
+
+    
+    if pelota.y >= alto: 
+        y_speed = -1
+    if pelota.y <= 0: 
+        y_speed = 1
+    if pelota.x <= 0: 
+        player_score += 1
+        pelota.center = (ancho/2, alto/2)
+        x_speed, y_speed = random.choice([1, -1]), random.choice([1, -1])
+    if pelota.x >= ancho: 
+        opponet_score += 1
+        x_speed, y_speed = random.choice([1, -1]), random.choice([1, -1])
+
+
+    pelota.x += x_speed * 2
+    pelota.y += y_speed * 2
 
     pantalla.fill("BLACK")
     pygame.draw.rect(pantalla, "white", player)
     pygame.draw.rect(pantalla, "white", opponet)
+    pygame.draw.circle(pantalla, "White", pelota.center, 10)
     text_rect = text.get_rect(center = pantalla.get_rect().center)
     pantalla.blit(text, text_rect)
     pygame.display.flip()
     
-pygame.quit()
+
 
 # Quiero que cuando presione salir se cierre la ventana (Logrado)
 # Quiero que el reloj se vea en la pantalla (Logrado)
